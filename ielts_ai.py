@@ -116,9 +116,9 @@ if "task" not in st.session_state:
 with st.sidebar:
     st.title("⚙️ Settings")
 
-    # API Key input — user pastes their key here
-    # type="password" hides the key so it's not visible
-    api_key = st.text_input(
+    # API Key — reads from Streamlit secrets automatically
+    # Falls back to manual input if no secret is set
+    api_key = st.secrets.get("ANTHROPIC_API_KEY", "") or st.text_input(
         "Claude API Key",
         type="password",
         placeholder="sk-ant-...",
